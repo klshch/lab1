@@ -6,15 +6,21 @@ port = 9999
 s.connect((host, port))
 
 while True:
-    server_response = s.recv(1024).decode('utf-8')
-    print(server_response, end='')
+    menu = s.recv(1024).decode('utf-8')
+    print(menu, end='')
 
-    sentence = input()
-    s.send(sentence.encode('utf-8'))
+    choice = input()
+    s.send(choice.encode('utf-8'))
 
-    server_response = s.recv(1024).decode('utf-8')
-    print(server_response)
+    if choice == '1':
+        sentence = input('\nEnter a sentence: ')
+        s.send(sentence.encode('utf-8'))
 
-    break
+        server_response = s.recv(1024).decode('utf-8')
+        print(server_response)
+
+    elif choice == '2':
+        print('\nYou have exited the program.')
+        break
 
 s.close()

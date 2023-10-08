@@ -11,7 +11,10 @@ while True:
 
     sentence = input()
     s.send(sentence.encode('utf-8'))
-    
+
+    server_response = s.recv(1024).decode('utf-8')
+    print(server_response)
+
     break
 
 s.close()
